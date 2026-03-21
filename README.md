@@ -1,4 +1,4 @@
-# Job Loss Prediction Model
+# Job Lose Prediction Model
 
 ## Overview
 This project is a binary classification machine learning model designed to predict the risk of job loss. It evaluates various professional metrics, including AI exposure, tech growth factors, and automation probability, to classify jobs as either "Safe" (0) or "At Risk" (1). 
