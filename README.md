@@ -1,6 +1,6 @@
-# Dynamic Labor Risk Simulator
+# Dynamic Job Risk Simulator
 
-The Dynamic Labor Risk Simulator is an offline Flutter application designed to predict the probability of job displacement. It evaluates an individual's career risk by combining their personal baseline metrics, macroeconomic threat factors, and adaptive competency vectors into a native machine learning pipeline. 
+The Dynamic Job Risk Simulator is an offline Flutter application designed to predict the probability of job displacement. It evaluates an individual's career risk by combining their personal baseline metrics, macroeconomic threat factors, and adaptive competency vectors into a native machine learning pipeline. 
 
 ## Application Features
 
