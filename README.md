@@ -1,37 +1,33 @@
-# Job Lose Prediction Model
+# Job Loss Risk Prediction Model
 
-## Overview
-This project is a binary classification machine learning model designed to predict the risk of job loss. It evaluates various professional metrics, including AI exposure, tech growth factors, and automation probability, to classify jobs as either "Safe" (0) or "At Risk" (1). 
+This repository contains a Machine Learning pipeline for a Binary Classifier designed to predict job loss risk. It evaluates whether a job role is "Safe" (0) or "At Risk" (1) based on various industry and technological factors.
 
-## Dataset
-The dataset (`data.csv`) consists of 3,000 records with features detailing job characteristics and vulnerability to automation. 
-Key features include:
-* `Job_Title`
-* `Average_Salary`
-* `Years_Experience`
-* `Education_Level`
-* `AI_Exposure_Index`
-* `Tech_Growth_Factor`
-* `Automation_Probability_2030`
+## Dataset and Preprocessing
+* The model utilizes an initial dataset of 3,000 records.
+* Data cleaning involves dropping missing values and removing duplicates.
+* The target variable, `Risk_Category`, is converted into a binary format where 'Low' becomes 0 and 'Medium'/'High' becomes 1.
+* Categorical variables are transformed into numerical formats using `LabelEncoder`.
+* Features are scaled using `StandardScaler` to achieve a mean of 0 and variance of 1.
 
-## Methodology
-* **Data Preprocessing:** Categorical variables were encoded, and numerical features were standardized using `StandardScaler`. The pipeline was strictly ordered (split before scaling) to prevent data leakage.
-* **Model Selection:** Logistic Regression was utilized as the baseline binary classifier.
-* **Validation:** 5-fold Cross-Validation was implemented to ensure the model's stability and generalization to unseen data.
+## Model Architecture
+* **Algorithm**: Logistic Regression configured with the `lbfgs` solver, balanced class weights, and a maximum of 1000 iterations.
+* **Data Split**: The data is split into 70% for training and 30% for testing.
 
-## Performance Metrics
-The model was evaluated on a 30% holdout test set (900 samples) and achieved exceptional results:
-* **Overall Accuracy:** 98%
-* **Cross-Validation Mean Accuracy:** 98.00% (Standard Deviation: 0.0063)
-* **Specificity (True Negative Rate):** 1.0 (100%) - The model generated zero false positives for the 'Safe' class.
-* **Recall (True Positive Rate):** 0.97 (97%) - The model successfully identified 97% of all actual 'At Risk' instances.
+## Evaluation Metrics
+The model demonstrates exceptional stability and accuracy in identifying risk:
+* **Cross-Validation**: Achieved a Mean Accuracy of 0.9738 with a standard deviation of 0.0077.
+* **Overall Accuracy**: 97.56% on the test set.
+* **Recall (True Positive Rate)**: 0.97 (97%).
+* **Error Rate**: The model made 22 mistakes out of 900 test samples, resulting in a 2.44% error rate.
 
-## Files in this Repository
-* `Job Lose Prediction Model.ipynb`: The Jupyter Notebook containing the full data pipeline, model training, and evaluation.
-* `data.csv`: The dataset used to train and test the model.
+### Specificity Calculation
+To evaluate the false positive rate rigorously, specificity is calculated directly from the extracted confusion matrix values.
+* **True Negatives (TN)**: 225
+* **False Positives (FP)**: 0
+* **Calculated Specificity**: 1.0 (100%), meaning the model correctly identified all 'Safe' jobs in the test set without a single false positive.
 
-## How to Run
-1. Clone this repository.
-2. Ensure you have Python installed along with `pandas`, `numpy`, `matplotlib`, `seaborn`, and `scikit-learn`.
-3. Open `Job Lose Prediction Model.ipynb` in Jupyter Notebook or JupyterLab.
-4. Run the cells sequentially to reproduce the model and metrics.
+## Export and Mobile Integration
+This model is prepared for cross-platform implementation:
+* A standard Python model file is exported as `job_loss_model.pkl` using `joblib`.
+* To facilitate mobile application development, the base Logistic Regression model is transpiled directly to Dart code (`model_logic.dart`) using the `m2cgen` library.
+* The `StandardScaler` mean and scale arrays are extracted for manual implementation within the Dart environment to ensure consistent feature scaling.
